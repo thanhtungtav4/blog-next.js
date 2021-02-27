@@ -1,17 +1,18 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from "next/head";
+import Link from "next/link";
 
 // data
-import { getAllPosts } from '../../lib/api';
+import { getAllPosts } from "../../lib/api";
 
 // styles
-import styles from '../../styles/Home.module.css';
-import blogStyles from '../../styles/Blog.module.css';
+import styles from "../../styles/Home.module.css";
+import blogStyles from "../../styles/Blog.module.css";
+
 const Blog = ({ allPosts: { edges } }) => (
   <div className={styles.container}>
     <Head>
       <title>Blog articles page</title>
-      <link rel='icon' href='/favicon.ico' />
+      <link rel="icon" href="/favicon.ico" />
     </Head>
 
     <main className={styles.main}>
@@ -41,3 +42,14 @@ const Blog = ({ allPosts: { edges } }) => (
     </main>
   </div>
 );
+
+export default Blog;
+
+export async function getStaticProps() {
+  const allPosts = await getAllPosts();
+  return {
+    props: {
+      allPosts
+    }
+  };
+}
